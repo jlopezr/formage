@@ -1,8 +1,4 @@
 'use strict';
-var Path = require('path');
-global.MONGOOSE_DRIVER_PATH = Path.dirname(require.resolve('grist/driver'));
-process.env.MONGOOSE_TEST_URI = 'grist://' + __dirname + "/data";
-
 var express = require('express'),
     mongoose = require('mongoose'),
     formage = require('../..'),
@@ -15,7 +11,7 @@ var MONGO_URL = process.env.MONGO_URL,
 
 var app = exports.app = express();
 app.set('port', process.env.PORT || 8080);
-app.set('mongo', MONGO_URL || MONGOLAB_URI || 'grist://formage-example-test-data');
+app.set('mongo', MONGO_URL || MONGOLAB_URI || 'mongodb://localhost/formage-example');
 
 app.configure('development', function() {
     app.use(nodestrum.ConnectionCloser);
@@ -34,27 +30,14 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
-app.get('/toni', function(req,res){
-    console.log('me estan buscando');
-    console.log(req.query.data);
-    console.log(req.query.query);
-    var result = [
-        {id:0,text:'ola', update: {'string':'HOLA LAURA', 'string_req':''}},
-        {id:1,text:'ke', update: {'string':'', 'string_req':'AHORA VENGO AQUI'}},
-        {id:2, text:'ase', update: {'string':'PARA ARRIBA OTRA VEZ', 'string_req':''}}
-    ];
-    res.json(result);
-    res.end();
-});
-
 app.use(app.router);
 
 mongoose.connect(app.get('mongo'));
 
 //mongoose.set('debug', true);
 var admin = formage.init(app, express, require('./models'), {
-    title: title || 'Formage Example',
-    default_section: 'Main',
+    title: title || 'OneGen01 Store',
+    default_section: 'Contents',
     admin_users_gui: true
 });
 
@@ -65,5 +48,5 @@ app.get('/', function(req, res) {
 });
 
 var server = app.listen(app.get('port'));
-console.log('Express server listening on port ', server.address().port);
-
+//server.timeout = 3000;
+console.log('Express server listening on port ', app.get('port'));

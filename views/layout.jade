@@ -44,6 +44,7 @@ html(lang='en')
                             block title
                                 a(href='#{rootPath}/') #{adminTitle}
                             block breadcrumb
+                                a(href='#{rootPath}/') #{adminTitle}
 
         .container-fluid.formage
             #content
@@ -54,12 +55,12 @@ html(lang='en')
                     - if (userPanel)
                         p.user-panel
                             !{userPanel}
-                    p
-                        a(href='http://github.com/Empeeric/formage') Formage
-                        | &nbsp;#{version}, from&nbsp;
-                        a(href='http://empeeric.com') Empeeric
-                    a(href='http://github.com/Empeeric/formage')
-                        img(src='#{rootPath}/images/logo-40.png')
+//-                    p
+//-                        a(href='http://github.com/Empeeric/formage') Formage
+//-                        | &nbsp;#{version}, from&nbsp;
+//-                        a(href='http://empeeric.com') Empeeric
+//-                    a(href='http://github.com/Empeeric/formage')
+//-                        img(src='#{rootPath}/images/logo-40.png')
 
             #old-version.alert.alert-error(hidden)
                 button.close(type='button',data-dismiss='alert') &times;

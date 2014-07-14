@@ -10,7 +10,7 @@ var schema = module.exports = new Schema({
     string: { type: String },
     string_req: { type: String, required: true, label: 'Name' },
     ref: { type: SchemaTypes.ObjectId, ref: 'pages' },
-    ref_with_query: { type: SchemaTypes.ObjectId, ref: 'pages', query:'__value__', url:'/' },
+    ref_with_query: { type: SchemaTypes.ObjectId, ref: 'pages', query:'title', url:'/toni', updates: true },
     ref_with_socket: { type: SchemaTypes.ObjectId, ref: 'pages', socket: true },
     date: { type: Date },
     datetime: { type: Date, widget:fWidgets.DateTimeWidget },

@@ -82,9 +82,20 @@ function initWidgets(ctx) {
     if ($.fn.select2) {
         $('.socket-select', ctx).each(getSocketFunctionForSelect2);
         $('.nf_ref', ctx).each(getQueryFunctionForSelect2);
+        $('.nf_ref_update').each(getUpdatesForSelect2);
         $('select', ctx).select2();
+        
     }
-    if ($.fn.datepicker) $('.nf_datepicker', ctx).datepicker({format: 'yyyy-mm-dd'});
+    if ($.fn.datepicker){
+        var myDatePicker = $("input[type='date']", ctx);
+        
+        myDatePicker.prop('type','text');
+        myDatePicker.datepicker({format: 'dd-yyyy'});
+        $(".add-on", ctx).on("click", function(){
+            myDatePicker.datepicker("show");
+        });
+        
+    }     
     $('[data-ref]', ctx).each(refLink);
 
     // Wire FilePicker widget. FieldBinding is done automagicly by type="filepicker"
@@ -187,6 +198,54 @@ function ListField(el) {
     initWidgets(this);
 }
 
+function getUpdatesForSelect2() {
+    var $this = $(this); // jshint ignore:line
+    if (~$this[0].className.indexOf('select2')) return;
+    var query_url = $this.data('url');
+    var query_data = decodeURIComponent($this.data('data'));
+    
+    $this.select2({query: function (options) {
+        var term = options.term;
+        //var page = options.page;
+        var context = options.context;
+        var callback = options.callback;
+        $.get(query_url, {
+            data: query_data,
+            query: term
+        }).success(function (rsp) {
+            var result = {
+                results: rsp['objects'] || rsp,
+                more: false,
+                context: context
+            };
+            callback(result);
+        });
+    },
+        initSelection: function (element, callback) {
+            var id = $(element).val();
+            if (id !== "") {
+                $.get(query_url, {
+                    data: query_data,
+                    id: id
+                }).done(function (rsp) {
+                    callback(rsp);
+                });
+            }
+        }
+    });
+    $this.on("change", function(e) {
+        if(e.added == null || e.added.update == null) return;
+        console.log("ALEXITO LLAMADOR");
+        console.log($this);
+        var updates = e.added.update;
+        for(var i in updates) {
+            var field = i;
+            var value = updates[i];
+            $('#id_'+field).val(value);
+            // $('[name="ElementNameHere"]')
+        }
+    });
+}
 
 function getQueryFunctionForSelect2() {
     var $this = $(this); // jshint ignore:line

@@ -1,3 +1,21 @@
+.navbar h1 {
+    font-size: 28px;
+}
+.navbar .navbar-inner {
+    min-height: 60px;
+}
+.navbar h1 a:first-child {
+    background: url('/admin/logo.png') no-repeat 0 0;
+    display: block;
+    width: 162px;
+    height: 35px;
+    text-indent: -999px;
+    float: left;
+    margin-right: 10px;
+}
+.navbar .btn-group {
+    margin-top: 15px;
+}
 .formage header .navbar-inner {
   padding: 20px 0;
   margin-bottom: 20px;
@@ -272,7 +290,7 @@
   min-height: 30px;
   background: #fff;
 }
-.formage .nf_listfield_container > .field_label {
+/*.formage .nf_listfield_container > .field_label {
   font-size: 20px;
   font-weight: bold;
   -webkit-user-select: none;
@@ -281,7 +299,7 @@
   user-select: none;
   margin-top: -25px;
   margin-left: -135px;
-}
+}*/
 .formage .nf_listfield_container > .list_summary {
   position: static;
   font-size: 14px;
@@ -312,15 +330,28 @@
   -webkit-box-shadow: #bbb 0 0 6px 0;
   box-shadow: #bbb 0 0 6px 0;
 }
+.formage .field.nf_listfield_container > label.field_label.optional_label{
+  padding:0;
+  margin-left:-134px;
+  margin-top:-15px;
+}
 .formage .nf_fieldset > h2,
 .formage .nf_listfield_container > label {
-  font-size: 20px;
+  /*font-size: 20px;
   text-align: right;
   width: 150px;
   position: absolute;
   margin: -21px 0 0 -145px;
   white-space: nowrap;
-  line-height: 1.5em;
+  line-height: 1.5em;*/
+  font-weight: normal;
+  font-size:14px;
+  padding:0;
+  margin-left:-134px;
+  margin-top:-15px;
+  width: 100px;
+  text-align:right;
+  float: left;
 }
 .formage .nf_fieldset > i,
 .formage .nf_listfield_container > i {

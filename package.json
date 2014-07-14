@@ -74,7 +74,7 @@
   ],
   "repository": "Empeeric/formage",
   "scripts": {
-    "start": "node example/classic/app",
+    "start": "node ./example/classic/app",
     "test": "mocha",
     "lint": "jshint .",
     "cover": "istanbul cover ./node_modules/mocha/bin/_mocha -x generated/**",

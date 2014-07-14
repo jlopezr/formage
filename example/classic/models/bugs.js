@@ -6,16 +6,17 @@ var mongoose = require('mongoose'),
     fWidgets = require('../../../').widgets;
 
 module.exports = new Schema({
+    title: { type: String },
     contact: {
         text: { en: SchemaTypes.Html , he: SchemaTypes.Html }
     },
-    refs: [{ type: SchemaTypes.ObjectId, ref: 'pages' }]
+    ref: [{ type: SchemaTypes.ObjectId, ref: 'pages' }]
 });
-module.exports.methods.toString = function () {return this.string_req};
+module.exports.methods.toString = function () {return this.text};
 
 module.exports.formage = {
     filters: ['ref'],
-    list: ['string_req', 'ref', 'image'],
+    list: ['title', 'ref', 'image'],
     subCollections: [{label: 'Sub Tests', model: 'pages', field:'ref'}],
     list_populate: ['ref']
 };

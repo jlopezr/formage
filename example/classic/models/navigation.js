@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
 
 var schema = new Schema({
     parent: { type: ObjectId, ref: 'navigation', inline:true },
+/*
     main: { type: ObjectId, ref: 'pages', inline:true },
     others: { type:[{ type: ObjectId, ref: 'pages', inline:true }], open:true },
     meta: [{
@@ -23,6 +24,7 @@ var schema = new Schema({
     order: { type: Number, editable: false },
     isMenu: { type: Boolean, 'default': true },
     isShow: { type: Boolean, 'default': true }
+*/
 });
 
 schema.formage = {
